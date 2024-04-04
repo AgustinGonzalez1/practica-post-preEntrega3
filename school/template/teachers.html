@@ -1,0 +1,50 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<main class="min-h-[calc(100vh-112px)] flex pt-6">
+  <section class="w-1/2 border-r-2 border-slate-700 flex justify-center items-center">
+    <div class="flex justify-center items-center w-full">
+      <form method="POST" class="w-1/2 p-4 bg-slate-600 rounded-lg flex flex-col gap-4">
+        {% csrf_token %}
+        <h2 class="text-3xl text-center">NUEVO PROFESOR</h2>
+        <input type="text" name="name" placeholder="Nombre: "
+          class="w-full p-2 rounded-md bg-slate-700 text-white hover:bg-slate-900 duration-300">
+        <input type="text" name="course_name" placeholder="Curso: "
+          class="w-full p-2 rounded-md bg-slate-700 text-white hover:bg-slate-900 duration-300">
+        <button type="submit"
+          class="w-full p-2 rounded-md bg-slate-700 text-white hover:bg-slate-900 duration-300">Enviar</button>
+        {% if message %}
+        <p class="text-green-400 text-center">{{message}}</p>
+        {% endif %}
+      </form>
+    </div>
+  </section>
+
+  <section class="w-1/2 border-r-2 border-slate-700 flex justify-center items-center px-5">
+    <div class="flex justify-center items-center w-full flex-col gap-4">
+      <form method="GET" class="w-1/2 p-4 bg-slate-600 rounded-lg flex flex-col gap-4">
+
+        <h2 class="text-3xl text-center">BUSCAR PROFESOR</h2>
+        <input type="text" name="name" placeholder="Nombre: "
+          class="w-full p-2 rounded-md bg-slate-700 text-white hover:bg-slate-900 duration-300">
+        <button type="submit"
+          class="w-full p-2 rounded-md bg-slate-700 text-white hover:bg-slate-900 duration-300">Enviar</button>
+      </form>
+      {% if teacher_filter %}
+      {% for teacher in teacher_filter %}
+      <div class="grid grid-cols-2 border-b-2 border-slate-700 p-2 w-full">
+        <p class="">{{teacher.name}}</p>
+        <p class="text-right">{{teacher.course_name}}</p>
+      </div>
+      {% endfor %}
+      {% else %}
+      <p>Sin resultados</p>
+      {% endif %}
+
+    </div>
+  </section>
+</main>
+
+
+{% endblock %}
