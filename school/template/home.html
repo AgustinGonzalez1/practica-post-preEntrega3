@@ -28,12 +28,14 @@
     <div class="flex flex-col w-full gap-4">
 
       {% for student in students %}
-      <div class="grid grid-cols-5 border-b-2 border-slate-700 p-2">
+      <div class="grid grid-cols-5 border-b-2 border-slate-700 p-2 items-center">
         <p class="">{{student.name}}</p>
         <p class="text-center">{{student.course}}</p>
         <p class="text-center">{{student.commission}}</p>
-        <a href="{% url 'delete-student' student.id %}" class="text-center">ELIMINAR</a>
-        <a href="{% url 'update-student' student.id %}" class="text-center">EDITAR</a>
+        <a href="{% url 'delete-student' student.id %}"
+          class="text-center mx-2 border-2 border-red-600 rounded-md hover:bg-red-600 duration-300">ELIMINAR</a>
+        <a href="{% url 'update-student' student.id %}"
+          class="text-center mx-2 border-2 border-blue-600 rounded-md hover:bg-blue-600 duration-300">EDITAR</a>
       </div>
       {% endfor %}
     </div>

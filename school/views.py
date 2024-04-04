@@ -69,4 +69,4 @@ def update_student(request, id):
       student.save()
       return redirect('/')
   
-  return render(request, 'updateStudent.html', {'student': student})
+  return render(request, 'updateStudent.html')
