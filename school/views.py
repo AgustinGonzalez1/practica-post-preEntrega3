@@ -84,10 +84,29 @@ def login_request(request):
       user = authenticate(username=username, password=password)
       if user is not None:
         login(request, user)
-        return redirect('/')
+        return redirect('/inicio')
       else:
         return render(request, 'login.html', {"message": 'Los datos son incorrectos'})
     else:
       return render(request, 'login.html', {"message": 'Usuario o contraseña incorrectos'})
   
   return render(request, 'login.html')
+
+def inicio(request):
+  print(request.user)
+  return render(request, 'index.html', {'message': "Hola " + request.user.username})
+
+def register(request):
+  if request.method == 'POST':
+    form = UserCreationForm(request.POST)
+    if form.is_valid():
+      form.save()
+      return redirect('/login')
+    
+  form = UserCreationForm()
+    
+  return render(request, 'register.html')
+
+def logout_request(request):
+  logout(request)
+  return redirect('/')
