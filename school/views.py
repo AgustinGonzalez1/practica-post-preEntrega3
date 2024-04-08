@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
 from .models import Course, Student, Teacher
 from school.forms import StudentForm, TeacherForm, CourseForm
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth import login, authenticate, logout
 
 
 # Create your views here.
@@ -70,3 +72,22 @@ def update_student(request, id):
       return redirect('/')
   
   return render(request, 'updateStudent.html')
+
+
+def login_request(request):
+  
+  if request.method == 'POST':
+    form = AuthenticationForm(request, data=request.POST)
+    if form.is_valid():
+      username = form.cleaned_data.get('username')
+      password = form.cleaned_data.get('password')
+      user = authenticate(username=username, password=password)
+      if user is not None:
+        login(request, user)
+        return redirect('/')
+      else:
+        return render(request, 'login.html', {"message": 'Los datos son incorrectos'})
+    else:
+      return render(request, 'login.html', {"message": 'Usuario o contraseña incorrectos'})
+  
+  return render(request, 'login.html')
