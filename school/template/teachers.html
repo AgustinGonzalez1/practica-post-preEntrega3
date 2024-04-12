@@ -33,9 +33,16 @@
       </form>
       {% if teacher_filter %}
       {% for teacher in teacher_filter %}
-      <div class="grid grid-cols-2 border-b-2 border-slate-700 p-2 w-full">
+      <div class="grid grid-cols-4 border-b-2 border-slate-700 p-2 w-full">
         <p class="">{{teacher.name}}</p>
         <p class="text-right">{{teacher.course_name}}</p>
+        {% if edit %}
+        <a href="{% url 'delete-teacher' teacher.id %}"
+          class="text-center mx-2 border-2 border-red-600 rounded-md hover:bg-red-600 duration-300">ELIMINAR</a>
+        <a href="{% url 'update-teacher' teacher.id %}"
+          class="text-center mx-2 border-2 border-blue-600 rounded-md hover:bg-blue-600 duration-300">EDITAR</a>
+
+        {% endif %}
       </div>
       {% endfor %}
       {% else %}

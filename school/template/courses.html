@@ -26,9 +26,15 @@
     <div class="flex flex-col w-full gap-4">
 
       {% for course in courses %}
-      <div class="grid grid-cols-2 border-b-2 border-slate-700 p-2">
+      <div class="grid grid-cols-4 border-b-2 border-slate-700 p-2">
         <p class="">{{course.name}}</p>
         <p class="text-right">{{course.teacher}}</p>
+        {% if edit %}
+        <a href="{% url 'delete-course' course.id %}"
+          class="text-center mx-2 border-2 border-red-600 rounded-md hover:bg-red-600 duration-300">ELIMINAR</a>
+        <a href="{% url 'update-course' course.id %}"
+          class="text-center mx-2 border-2 border-blue-600 rounded-md hover:bg-blue-600 duration-300">EDITAR</a>
+        {% endif %}
       </div>
       {% endfor %}
     </div>

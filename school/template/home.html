@@ -32,10 +32,12 @@
         <p class="">{{student.name}}</p>
         <p class="text-center">{{student.course}}</p>
         <p class="text-center">{{student.commission}}</p>
+        {% if edit %}
         <a href="{% url 'delete-student' student.id %}"
           class="text-center mx-2 border-2 border-red-600 rounded-md hover:bg-red-600 duration-300">ELIMINAR</a>
         <a href="{% url 'update-student' student.id %}"
           class="text-center mx-2 border-2 border-blue-600 rounded-md hover:bg-blue-600 duration-300">EDITAR</a>
+        {% endif %}
       </div>
       {% endfor %}
     </div>
