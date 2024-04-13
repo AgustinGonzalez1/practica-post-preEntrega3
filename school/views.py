@@ -100,6 +100,11 @@ def update_student(request, id):
 
 def login_request(request):
   
+  user = request.user
+  
+  if not user.is_anonymous:
+    return redirect('/')
+  
   if request.method == 'POST':
     form = AuthenticationForm(request, data=request.POST)
     if form.is_valid():
@@ -121,6 +126,12 @@ def inicio(request):
   return render(request, 'index.html', {'message': "Hola " + request.user.username})
 
 def register(request):
+  
+  user = request.user
+  
+  if not user.is_anonymous:
+    return redirect('/')
+  
   if request.method == 'POST':
     form = UserCreationForm(request.POST)
     if form.is_valid():
